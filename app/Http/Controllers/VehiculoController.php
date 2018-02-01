@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+use App\Vehiculo;
+
 class VehiculoController extends Controller {
 
 	/**
@@ -14,27 +16,7 @@ class VehiculoController extends Controller {
 	 */
 	public function index()
 	{
-		//
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
+		return response()->json(['datos' => Vehiculo::all()],200);
 	}
 
 	/**
@@ -45,40 +27,14 @@ class VehiculoController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
-	}
+		$vehiculo = Vehiculo::find($id);
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+		if(!$vehiculo)
+		{
+			return response()->json(['mensaje' => 'No se encuentra este vehiculo', 'codigo' => 404],404);
+		}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
+		return response()->json(['datos' => $vehiculo],200);
 	}
 
 }
